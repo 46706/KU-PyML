@@ -1,0 +1,24 @@
+import pandas as pd
+
+data = [['Jack', 25, 1.78, 67, 'M'], ['James', 35, 1.86, 62, 'M'], ['Jullie', 19, 1.69, 52, 'F'], ['Ahmed', 23, 1.91, 91, 'M'], ['Marge', 42, 1.72, 63, 'F'], ['Lucy', 18, 1.76,  49, 'F'], ['Mark', 29, 1.73, 82, 'M']]
+
+df = pd.DataFrame(data, columns=['Name', 'Age', "Height", 'Weight', "Gender"])
+
+print(df)
+
+print("The average weight of the participants is: ", df["Weight"].mean())
+print("The average age of the participants is: ", df["Age"].mean())
+
+print(df.sort_values("Weight"))
+print(df.sort_values("Age", ascending=False))
+print(df.sort_values(["Weight","Age"], ascending=[True, False]))
+
+print("People who's wheignt is over 50 kg:", df["Weight"] > 50)
+
+print(df)
+df["bmi"] = df["Weight"] / df["Height"] ** 2
+print(df)
+
+def pct10(column):
+    return column.quantile(0.1)
+print(df["Weight"].agg(pct10))
